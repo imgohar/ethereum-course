@@ -17,11 +17,10 @@ const deploy = async () => {
     console.log(accounts[0]);
 
     const result = await new web3.eth.Contract(interface)
-        // .deploy({ data: '0x' + bytecode })
         .deploy({ data: bytecode })
         .send({ gas: 1000000, from: accounts[0] });
 
-    console.log(interface);
+    console.log(JSON.stringify(interface));
     console.log(result.options.address);
 };
 

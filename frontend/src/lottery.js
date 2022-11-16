@@ -21,13 +21,7 @@ const abi = [
     {
         inputs: [],
         name: 'getPlayers',
-        outputs: [
-            {
-                internalType: 'address[]',
-                name: '',
-                type: 'address[]',
-            },
-        ],
+        outputs: [{ internalType: 'address[]', name: '', type: 'address[]' }],
         stateMutability: 'view',
         type: 'function',
         constant: true,
@@ -36,13 +30,7 @@ const abi = [
     {
         inputs: [],
         name: 'manager',
-        outputs: [
-            {
-                internalType: 'address',
-                name: '',
-                type: 'address',
-            },
-        ],
+        outputs: [{ internalType: 'address', name: '', type: 'address' }],
         stateMutability: 'view',
         type: 'function',
         constant: true,
@@ -59,13 +47,7 @@ const abi = [
     {
         inputs: [],
         name: 'winner',
-        outputs: [
-            {
-                internalType: 'address',
-                name: '',
-                type: 'address',
-            },
-        ],
+        outputs: [{ internalType: 'address', name: '', type: 'address' }],
         stateMutability: 'view',
         type: 'function',
         constant: true,
