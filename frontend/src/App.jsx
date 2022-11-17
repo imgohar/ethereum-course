@@ -8,6 +8,7 @@ function App() {
     const [players, setPlayers] = useState([]);
     const [balance, setBalance] = useState('');
     const [value, setValue] = useState('');
+    const [winner, setWinner] = useState('');
     const [message, setMessage] = useState('');
 
     useEffect(() => {
@@ -31,6 +32,23 @@ function App() {
         });
 
         setMessage('You have been entered!');
+    };
+
+    const onClick = async (e) => {
+        e.preventDefault();
+
+        const accounts = await web3.eth.getAccounts();
+
+        setMessage('Waiting on transaction success....');
+
+        await lottery.methods.pickWinner().send({
+            from: accounts[0],
+        });
+
+        const winnerAddress = await lottery.methods.winner().call();
+        setWinner(winnerAddress);
+
+        setMessage('Winner has been picked!');
     };
 
     return (
@@ -58,9 +76,15 @@ function App() {
                 </div>
                 <button type="submit">Enter</button>
             </form>
+            <hr />
+
+            <h4>Ready to pick a winner</h4>
+            <button onClick={onClick}>Pick a Winner!</button>
 
             <hr />
+
             <h1>{message}</h1>
+            <p>{winner}</p>
         </div>
     );
 }
