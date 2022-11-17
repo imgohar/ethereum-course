@@ -1,13 +1,13 @@
 {
     "name": "inbox",
     "version": "1.0.0",
-    "description": "",
+    "description": "Ethereum Course",
     "main": "index.js",
     "scripts": {
         "test": "mocha"
     },
     "keywords": [],
-    "author": "",
+    "author": "Gohar Ashraf",
     "license": "ISC",
     "dependencies": {
         "dotenv": "^16.0.3",
