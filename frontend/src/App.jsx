@@ -8,6 +8,7 @@ function App() {
     const [players, setPlayers] = useState([]);
     const [balance, setBalance] = useState('');
     const [value, setValue] = useState('');
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
         const getData = async () => {
@@ -22,10 +23,14 @@ function App() {
         e.preventDefault();
         const accounts = await web3.eth.getAccounts();
 
+        setMessage('Waiting on transaction success....');
+
         await lottery.methods.enter().send({
             from: accounts[0],
             value: web3.utils.toWei(value, 'ether'),
         });
+
+        setMessage('You have been entered!');
     };
 
     return (
@@ -46,12 +51,16 @@ function App() {
                         onChange={(event) => setValue(event.target.value)}
                         type="number"
                         step="0.001"
+                        min="0.002"
                         value={value}
                         placeholder="Number of ether"
                     />
                 </div>
                 <button type="submit">Enter</button>
             </form>
+
+            <hr />
+            <h1>{message}</h1>
         </div>
     );
 }
