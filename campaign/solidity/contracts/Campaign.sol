@@ -3,12 +3,25 @@ pragma solidity >=0.4.22 <0.9.0;
 
 
 contract Campaign {
+
+    struct Reqeust{
+        string description;
+        uint value;
+        address recipient;
+        bool complete;
+    }
+
     address public manager;
+    uint public minimumContribution;
+    address[] public approvers;
     address public winner;
-    address[] private players;
+
+
+    Reqeust[] public requests;
     
-    constructor() {
+    constructor(uint minimum) {
         manager = msg.sender;
+        minimumContribution = minimum;
     }
     
     modifier admin() {
@@ -17,28 +30,14 @@ contract Campaign {
     }
     
     modifier minEntry() {
-        require(msg.value > .001 ether, "Require min amount of ETH(0.0011) to enter");
+        require(msg.value > minimumContribution, "Require min amount of ETH(0.0011) to enter");
         _;
     }
     
-    function enter() public payable minEntry {
-        players.push(msg.sender);
+    function contribute() public payable minEntry {
+        approvers.push(msg.sender);
     }
     
-    function pickWinner() public admin {
-        uint index = random() % players.length;
-        address contractAddress = address(this);
-        address winnerAddress = players[index];
-        winner = players[index];
-        payable(winnerAddress).transfer(contractAddress.balance);
-        players = new address[](0);
-    }
     
-    function getPlayers() public view returns (address[] memory) {
-        return players;
-    }
     
-    function random() private view returns (uint) {
-        return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, players)));
-    }
 }
