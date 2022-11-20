@@ -37,7 +37,13 @@ contract Campaign {
     }
 
     function createRequest(string memory description,uint value,address recipient) public payable admin{
-
+        Reqeust memory newRequest = Reqeust({
+            description: description,
+            value: value,
+            recipient: recipient,
+            complete: false
+        });
+        requests.push(newRequest);
     }
     
     
