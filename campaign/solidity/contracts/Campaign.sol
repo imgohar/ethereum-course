@@ -14,8 +14,6 @@ contract Campaign {
     address public manager;
     uint public minimumContribution;
     address[] public approvers;
-    address public winner;
-
 
     Reqeust[] public requests;
     
@@ -36,6 +34,10 @@ contract Campaign {
     
     function contribute() public payable minEntry {
         approvers.push(msg.sender);
+    }
+
+    function createRequest(string memory description,uint value,address recipient) public payable admin{
+
     }
     
     
